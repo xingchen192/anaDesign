@@ -43,4 +43,19 @@ public interface dataMapper {
 
     @Delete("delete from dataStruct where name = #{name} and jobName = #{jobName} and value = #{value}")
     void deleteData(@Param("jobName")String jobName,@Param("name")String name,@Param("value")String value);
+
+
+
+
+    ///处理简历数据，包括求职者技能，求职者意图，求职者分布
+    @Select("select skills from resume")
+    List<String> getSkills();
+
+
+    @Select("select comment from resume")
+    List<String> getComments();
+
+
+
+
 }
