@@ -22,29 +22,27 @@ public interface dataMapper {
     List<allMapReturn> getGroupMapData();
 
     @Select("SELECT * FROM jobData WHERE jobName like %#{keyword}%;")
-    List<jobsData> getGroupJobData(@Param("keyword")String keyword);
+    List<jobsData> getGroupJobData(@Param("keyword") String keyword);
 
     @Select("select dataStruct.jobName from dataStruct group by jobName")
     List<String> getAllJobTypes();
 
     @Select("select dataStruct.value from dataStruct where jobName = #{jobName} and name = #{name}")
-    List<Integer> getValue(@Param("jobName")String jobName,@Param("name")String name);
+    List<Integer> getValue(@Param("jobName") String jobName, @Param("name") String name);
 
     @Update("update dataStruct set value = #{value} where jobName = #{jobName} and name = #{name}")
-    int updateDataStruct(@Param("jobName")String jobName,@Param("name")String name,@Param("value")String value);
+    int updateDataStruct(@Param("jobName") String jobName, @Param("name") String name, @Param("value") String value);
 
     @Insert("insert into dataStruct (jobName, name, value) VALUES (#{jobName},#{name},#{value})")
-    int insertDataStruct(@Param("jobName")String jobName,@Param("name")String name,@Param("value")String value);
+    int insertDataStruct(@Param("jobName") String jobName, @Param("name") String name, @Param("value") String value);
 
 
     @Insert("insert into jobData (jobName, jobArea, salary, des) VALUES (#{jobName},#{area},#{salary},#{des})")
-    int insertData(@Param("jobName")String jobName,@Param("area")String area,@Param("salary")String salary,@Param("des")String des);
+    int insertData(@Param("jobName") String jobName, @Param("area") String area, @Param("salary") String salary, @Param("des") String des);
 
 
     @Delete("delete from dataStruct where name = #{name} and jobName = #{jobName} and value = #{value}")
-    void deleteData(@Param("jobName")String jobName,@Param("name")String name,@Param("value")String value);
-
-
+    void deleteData(@Param("jobName") String jobName, @Param("name") String name, @Param("value") String value);
 
 
     ///处理简历数据，包括求职者技能，求职者意图，求职者分布
@@ -55,7 +53,12 @@ public interface dataMapper {
     @Select("select comment from resume")
     List<String> getComments();
 
+    @Insert("insert into resume (name, area, skills, intention, comment) VALUES (#{name},#{area},#{skills},#{intention},#{comment})")
+    int addResum(@Param("name") String name, @Param("area") String area, @Param("skills") String skills, @Param("intention") String intention, @Param("comment") String comment);
 
+    @Select("select comment from resume group by comment")
+    List<String> getAllComment();
 
-
+    @Select("select skills from resume group by skills")
+    List<String> getAllSkills();
 }

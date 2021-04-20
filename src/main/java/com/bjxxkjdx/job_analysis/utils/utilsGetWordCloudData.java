@@ -97,6 +97,7 @@ public class utilsGetWordCloudData {
     public static List<allMapReturn> utilsGetWordCloudDatas(List<String> lists) {
         List<String> results = new ArrayList();
         for (String res : lists) {
+//            System.out.println(res);
 //            List<String> keywordList = HanLP.extractKeyword(res, 10);
 //            System.out.println(keywordList);
 //            List<String> sentenceList = HanLP.extractSummary(res, 3);
@@ -105,13 +106,16 @@ public class utilsGetWordCloudData {
 //            System.out.println("N-最短分词：" + nShortSegment.seg(res) + "\n最短路分词：" + shortestSegment.seg(res));
 
             List<String> phraseList = HanLP.extractPhrase(res, 1000);
+//            for (String re:phraseList)
+//                System.out.println(re);
 //            System.out.println(phraseList);
             results.addAll(phraseList);
         }
+
         Set<String> uniqueSet = new HashSet(results);
         List<allMapReturn> allMapReturns = new ArrayList<>();
         for (String temp : uniqueSet) {
-            if (Collections.frequency(results, temp) > 5) {
+            if (Collections.frequency(results, temp) !=0) {
                 allMapReturn allMapReturn = new allMapReturn(temp, Collections.frequency(results, temp));
                 allMapReturns.add(allMapReturn);
                 System.out.println("{\'name\':\"" + temp + "\"" + ", " + "\"value\":" + Collections.frequency(results, temp) + "},");

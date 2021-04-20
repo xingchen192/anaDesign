@@ -135,59 +135,29 @@ public class dataController {
 //                if (lo.get(1)==null)
 //           }
             if (lo.size() > 5) {
-                for (Object c : lo) {
-                    if (c == null)
-                        c = "";
-//                System.out.println(c);
-                }
-            }else {
-                return "格式错误";
+                dataMapper.addResum(lo.get(1) == null ? "" : lo.get(1).toString(), lo.get(2) == null ? "" : lo.get(2).toString(), lo.get(3) == null ? "" : lo.get(3).toString(), lo.get(4) == null ? "" : lo.get(4).toString(), lo.get(5) == null ? "" : lo.get(5).toString());
+            } else {
+                break;
             }
 
-
-//            System.out.println(lo.get(0));
-//            System.out.println(lo.get(1));
-//            System.out.println(lo.get(2));
-//            System.out.println(lo.get(3));
-//            if (lo.size() > 5) {
-//                return "格式错误";
-//            } else {
-//                jobsDataList.add(new jobsData(lo.get(0).toString(), lo.get(1).toString(), lo.get(2).toString(), lo.get(3).toString()));
-//                dataMapper.insertData(lo.get(0).toString(),lo.get(1).toString(),lo.get(2).toString(),lo.get(3).toString());
-//            }
         }
 
-//        for (jobsData jobsData : jobsDataList) {
-//            boolean flag = true;
-//            for (String c : nameLists) {
-//                if (jobsData.getJobName().contains(c)) {
-//                    jobsData.setJobName(c);
-//                    flag = false;
-//                }
-//            }
-//            if (flag) {
-//                jobsDataList.remove(jobsData);
-//            }
-//
-//        }
-
-//        List<jobsData> jobsDataListRes = utilsGetWordCloudData.utilsHandle(jobsDataList,nameLists);
-//        List<dataReturn> res = utilsGetWordCloudData.utilsGetDataStruct(jobsDataListRes);
-//
-//        for (dataReturn dataReturn : res) {
-////            if (dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName())!=null)
-//            List<Integer> values = dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName());
-//            if (values.size() > 0) {
-//                dataMapper.deleteData(dataReturn.getJobName(), dataReturn.getName(),String.valueOf(values.get(0)));
-//                dataMapper.insertDataStruct(dataReturn.getJobName(),dataReturn.getName(),String.valueOf(dataReturn.getValue() + values.get(0)));
-////                System.out.println(dataMapper.updateDataStruct(dataReturn.getJobName(),dataReturn.getName(),String.valueOf(dataReturn.getValue())));
-//            } else {
-//                dataMapper.insertDataStruct(dataReturn.getJobName(),dataReturn.getName(),String.valueOf(dataReturn.getValue()));
-//            }
-//
-//        }
 
         return "上传成功";
     }
+
+    @GetMapping(value = "/allCommments")
+    public List<allMapReturn> getAllComments() {
+        utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment());
+
+        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment());
+    }
+
+    @GetMapping(value = "/allSkills")
+    public List<allMapReturn> getAllSkills() {
+        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllSkills());
+//        return dataMapper.getAllSkills();
+    }
+
 
 }
