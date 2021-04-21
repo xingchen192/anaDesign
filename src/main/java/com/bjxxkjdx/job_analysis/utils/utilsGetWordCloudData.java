@@ -94,23 +94,30 @@ public class utilsGetWordCloudData {
     }
 
 
-    public static List<allMapReturn> utilsGetWordCloudDatas(List<String> lists) {
+    public static List<allMapReturn> utilsGetWordCloudDatas(List<String> lists, int type) {
         List<String> results = new ArrayList();
-        for (String res : lists) {
+        if (type == 0) {
+            for (String res : lists) {
 //            System.out.println(res);
-//            List<String> keywordList = HanLP.extractKeyword(res, 10);
-//            System.out.println(keywordList);
-//            List<String> sentenceList = HanLP.extractSummary(res, 3);
-//            System.out.println(sentenceList);
-//            System.out.println(analyzer.analyze(res));
-//            System.out.println("N-最短分词：" + nShortSegment.seg(res) + "\n最短路分词：" + shortestSegment.seg(res));
-
-            List<String> phraseList = HanLP.extractPhrase(res, 1000);
+                List<String> keywordList = HanLP.extractKeyword(res, 100);
+//            List<String> phraseList = HanLP.extractPhrase(res, 1000);
 //            for (String re:phraseList)
 //                System.out.println(re);
 //            System.out.println(phraseList);
-            results.addAll(phraseList);
+                results.addAll(keywordList);
+            }
+        } else {
+            for (String res : lists) {
+
+                List<String> phraseList = HanLP.extractPhrase(res, 1000);
+//            for (String re:phraseList)
+//                System.out.println(re);
+//            System.out.println(phraseList);
+                results.addAll(phraseList);
+            }
+
         }
+
 
         Set<String> uniqueSet = new HashSet(results);
         List<allMapReturn> allMapReturns = new ArrayList<>();

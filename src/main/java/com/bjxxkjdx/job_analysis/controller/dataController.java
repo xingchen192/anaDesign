@@ -148,14 +148,21 @@ public class dataController {
 
     @GetMapping(value = "/allCommments")
     public List<allMapReturn> getAllComments() {
-        utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment());
+//        utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment(),0);
 
-        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment());
+        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment(),1);
     }
 
     @GetMapping(value = "/allSkills")
     public List<allMapReturn> getAllSkills() {
-        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllSkills());
+        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllSkills(),0);
+//        return dataMapper.getAllSkills();
+    }
+
+    @GetMapping(value = "/type")
+    public List<allMapReturn> getTypeData(@RequestParam(value = "name") String name) {
+
+        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllName(name),1);
 //        return dataMapper.getAllSkills();
     }
 

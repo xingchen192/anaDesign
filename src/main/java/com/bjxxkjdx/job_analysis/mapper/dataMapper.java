@@ -61,4 +61,9 @@ public interface dataMapper {
 
     @Select("select skills from resume group by skills")
     List<String> getAllSkills();
+
+    @Select("select des from jobData where jobName like '%#{name}%' group by des")
+    List<String> getAllName(@Param("name") String name);
+
+
 }

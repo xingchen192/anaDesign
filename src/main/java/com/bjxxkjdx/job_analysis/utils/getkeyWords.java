@@ -32,7 +32,7 @@ public class getkeyWords {
             e.printStackTrace();
         }
 
-        utilsGetWordCloudData.utilsGetWordCloudDatas(arrayList);
+        utilsGetWordCloudData.utilsGetWordCloudDatas(arrayList,0);
 //        List<String> results = new ArrayList();
 //        for (String res : arrayList) {
 ////            List<String> keywordList = HanLP.extractKeyword(res, 10);
