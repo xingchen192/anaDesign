@@ -62,8 +62,15 @@ public interface dataMapper {
     @Select("select skills from resume group by skills")
     List<String> getAllSkills();
 
-    @Select("select des from jobData where jobName like '%#{name}%' group by des")
+    @Select("select des from jobData where jobName like '%${name}%' group by des")
     List<String> getAllName(@Param("name") String name);
 
+    @Insert("insert into wordCloud (jobName, name, value) VALUES (#{jobName},#{name},#{value})")
+    int insertWordCloud(@Param("jobName") String jobName, @Param("name") String name, @Param("value") String value);
 
+    @Select("select salary from jobData where salary like '%-%'")
+    List<String> getAllSalary();
+
+    @Select("select jobName,name,value from wordCloud where (wordCloud.value  > #{value}) and (jobName = #{name})")
+    List<allMapReturn> getTypeD(@Param("value") int value,@Param("name") String jobName);
 }

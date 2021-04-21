@@ -150,21 +150,40 @@ public class dataController {
     public List<allMapReturn> getAllComments() {
 //        utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment(),0);
 
-        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment(),1);
+        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllComment(), 1);
     }
 
     @GetMapping(value = "/allSkills")
     public List<allMapReturn> getAllSkills() {
-        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllSkills(),0);
+        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllSkills(), 0);
 //        return dataMapper.getAllSkills();
     }
 
     @GetMapping(value = "/type")
     public List<allMapReturn> getTypeData(@RequestParam(value = "name") String name) {
+        List<allMapReturn> re = new ArrayList<>();
+        if (name.equals("java") || name.equals("android")) {
+            re = dataMapper.getTypeD(5, name);
+        } else if (name.equals("python")) {
+            System.out.println("python");
+            re = dataMapper.getTypeD(0, name);
+        } else
+            re = dataMapper.getTypeD(1, name);
 
-        return utilsGetWordCloudData.utilsGetWordCloudDatas(dataMapper.getAllName(name),1);
+
+//        for (allMapReturn r : re){
+//            dataMapper.insertWordCloud(name,r.getName(),String.valueOf(r.getValue()));
+//        }
+        return re;
 //        return dataMapper.getAllSkills();
     }
 
+    @GetMapping(value = "/salary")
+    public List<allMapReturn> getSalary() {
+
+
+        return utilsGetWordCloudData.handleSalary(dataMapper.getAllSalary());
+//        return dataMapper.getAllSkills();
+    }
 
 }

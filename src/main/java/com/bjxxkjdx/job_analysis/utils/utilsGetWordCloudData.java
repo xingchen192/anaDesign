@@ -76,7 +76,7 @@ public class utilsGetWordCloudData {
             for (String temp : uniqueSet) {
                 dataReturn dataReturn = new dataReturn(data.getJobName(), temp, Collections.frequency(areas, temp));
                 dataReturnList.add(dataReturn);
-                System.out.println(data.getJobName()+"{\'name\':\"" + temp + "\"" + ", " + "\"value\":" + Collections.frequency(areas, temp) + "},");
+                System.out.println(data.getJobName() + "{\'name\':\"" + temp + "\"" + ", " + "\"value\":" + Collections.frequency(areas, temp) + "},");
             }
 
 //            dataReturn dataReturn = new dataReturn();
@@ -122,12 +122,49 @@ public class utilsGetWordCloudData {
         Set<String> uniqueSet = new HashSet(results);
         List<allMapReturn> allMapReturns = new ArrayList<>();
         for (String temp : uniqueSet) {
-            if (Collections.frequency(results, temp) !=0) {
+            if (Collections.frequency(results, temp) != 0) {
                 allMapReturn allMapReturn = new allMapReturn(temp, Collections.frequency(results, temp));
                 allMapReturns.add(allMapReturn);
                 System.out.println("{\'name\':\"" + temp + "\"" + ", " + "\"value\":" + Collections.frequency(results, temp) + "},");
             }
         }
         return allMapReturns;
+    }
+
+
+    public static List<allMapReturn> handleSalary(List<String> salarys) {
+        List<String> res = new ArrayList<>();
+        for (String sala : salarys) {
+//            System.out.println(sala);
+            res.add(sala.split("-")[0]);
+        }
+
+        Set<String> uniqueSet = new HashSet(res);
+        List<allMapReturn> allMapReturns = new ArrayList<>();
+        for (String temp : uniqueSet) {
+            if (Collections.frequency(res, temp) != 0) {
+                allMapReturn allMapReturn = new allMapReturn(temp, Collections.frequency(res, temp));
+                allMapReturns.add(allMapReturn);
+//                System.out.println("{\'name\':\"" + temp + "\"" + ", " + "\"value\":" + Collections.frequency(res, temp) + "},");
+            }
+        }
+
+        List<allMapReturn> allMapReturns2 = new ArrayList<>();
+        allMapReturns2.add(new allMapReturn("4-10k/月", 0));
+        allMapReturns2.add(new allMapReturn("10-20k/月", 0));
+        allMapReturns2.add(new allMapReturn("20-30k/月", 0));
+        allMapReturns2.add(new allMapReturn("其他", 0));
+        for (allMapReturn mapReturn : allMapReturns) {
+            if (Integer.parseInt(mapReturn.getName()) >= 4 && Integer.parseInt(mapReturn.getName()) <= 10) {
+                allMapReturns2.get(0).setValue(allMapReturns2.get(0).getValue() + mapReturn.getValue());
+            } else if (Integer.parseInt(mapReturn.getName()) >= 10 && Integer.parseInt(mapReturn.getName()) <= 20) {
+                allMapReturns2.get(1).setValue(allMapReturns2.get(1).getValue() + mapReturn.getValue());
+            } else if (Integer.parseInt(mapReturn.getName()) >= 20 && Integer.parseInt(mapReturn.getName()) <= 30) {
+                allMapReturns2.get(2).setValue(allMapReturns2.get(2).getValue() + mapReturn.getValue());
+            } else {
+                allMapReturns2.get(3).setValue(allMapReturns2.get(3).getValue() + mapReturn.getValue());
+            }
+        }
+        return allMapReturns2;
     }
 }
