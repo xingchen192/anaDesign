@@ -186,4 +186,11 @@ public class dataController {
 //        return dataMapper.getAllSkills();
     }
 
+    @GetMapping(value = "/resArea")
+    public List<allMapReturn> getResArea() {
+
+
+        return utilsGetWordCloudData.utilHandelResArea(dataMapper.getResArea());
+//        return dataMapper.getAllSkills();
+    }
 }

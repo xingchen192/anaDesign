@@ -167,4 +167,18 @@ public class utilsGetWordCloudData {
         }
         return allMapReturns2;
     }
+
+
+    public static List<allMapReturn> utilHandelResArea(List<String> areas){
+        Set<String> uniqueSet = new HashSet(areas);
+        List<allMapReturn> allMapReturns = new ArrayList<>();
+        for (String temp : uniqueSet) {
+            if (Collections.frequency(areas, temp) != 0) {
+                allMapReturn allMapReturn = new allMapReturn(temp, Collections.frequency(areas, temp));
+                allMapReturns.add(allMapReturn);
+//                System.out.println("{\'name\':\"" + temp + "\"" + ", " + "\"value\":" + Collections.frequency(res, temp) + "},");
+            }
+        }
+        return allMapReturns;
+    }
 }

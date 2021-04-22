@@ -124,7 +124,7 @@ public class resumeController {
         Map<employment, Float> floatMap = new HashMap<>();
         for (employment empWithId : jobdes) {
             float re = docVectorModel.similarity(sb.toString(), empWithId.getDescString());
-            if (re > 0.7) {
+            if (re > 0.6) {
                 floatMap.put(empWithId, re);
 //                System.out.println(re);
 //                res.add(empWithId);
@@ -224,9 +224,9 @@ public class resumeController {
             List<Float> floats = new ArrayList<>();
             for (employment empWithId : jobdes) {
                 float re = docVectorModel.similarity(sb.toString(), empWithId.getDescString());
+                System.out.println(re);
 
-                if (re > 0.6) {
-                    System.out.println(re);
+                if (re > 0.5) {
                     floats.add(re);
 //                    res.add(empWithId);
                 }
@@ -240,45 +240,6 @@ public class resumeController {
         return listList;
     }
 
-
-//    /**
-//     * 使用 Map按value进行排序
-//     *
-//     * @param map
-//     * @return
-//     */
-//    public static Map<employment, Float> sortMapByValue(Map<employment, Float> oriMap) {
-//        if (oriMap == null || oriMap.isEmpty()) {
-//            return null;
-//        }
-//        Map<employment, Float> sortedMap = new LinkedHashMap<employment, Float>();
-//        List<Map.Entry<employment, Float>> entryList = new ArrayList<Map.Entry<employment, Float>>(
-//                oriMap.entrySet());
-//        Collections.sort(entryList, new MapValueComparator());
-//
-//        Iterator<Map.Entry<employment, Float>> iter = entryList.iterator();
-//        Map.Entry<employment, Float> tmpEntry = null;
-//        while (iter.hasNext()) {
-//            tmpEntry = iter.next();
-//            sortedMap.put(tmpEntry.getKey(), tmpEntry.getValue());
-//        }
-//        return sortedMap;
-//    }
-//
-//    static class MapValueComparator implements Comparator<Map.Entry<employment, Float>> {
-//
-//        @Override
-//        public int compare(Map.Entry<employment, Float> me1, Map.Entry<employment, Float> me2) {
-//            //按照从大到小的顺序排列，如果想正序 调换me1 me2的位置
-//            return me2.getValue().compareTo(me1.getValue());
-//        }
-//    }
-//
-//
-//    private static List<employment> sort(Map<employment, Float> floatMap) {
-//
-//        return null;
-//    }
 
 
 }

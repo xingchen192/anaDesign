@@ -71,6 +71,9 @@ public interface dataMapper {
     @Select("select salary from jobData where salary like '%-%'")
     List<String> getAllSalary();
 
+    @Select("select  area from resume")
+    List<String> getResArea();
+
     @Select("select jobName,name,value from wordCloud where (wordCloud.value  > #{value}) and (jobName = #{name})")
     List<allMapReturn> getTypeD(@Param("value") int value,@Param("name") String jobName);
 }
