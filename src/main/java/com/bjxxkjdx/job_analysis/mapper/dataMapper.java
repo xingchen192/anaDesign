@@ -71,6 +71,9 @@ public interface dataMapper {
     @Select("select salary from jobData where salary like '%-%'")
     List<String> getAllSalary();
 
+    @Select("select salary from jobData where salary like '%-%' and jobName like '%${jobName}%'")
+    List<String> getTypeSalary(@Param("jobName") String jobName);
+
     @Select("select  area from resume")
     List<String> getResArea();
 

@@ -186,6 +186,13 @@ public class dataController {
 //        return dataMapper.getAllSkills();
     }
 
+    @GetMapping(value = "/typeSalary")
+    public List<allMapReturn> getSalary(@RequestParam(value = "name") String name) {
+        return utilsGetWordCloudData.handleSalary(dataMapper.getTypeSalary(name));
+//        return utilsGetWordCloudData.handleSalary(dataMapper.getAllSalary());
+//        return dataMapper.getAllSkills();
+    }
+
     @GetMapping(value = "/resArea")
     public List<allMapReturn> getResArea() {
 
