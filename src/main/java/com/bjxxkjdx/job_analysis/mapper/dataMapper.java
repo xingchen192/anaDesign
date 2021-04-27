@@ -37,7 +37,7 @@ public interface dataMapper {
     int insertDataStruct(@Param("jobName") String jobName, @Param("name") String name, @Param("value") String value);
 
 
-    @Insert("insert into jobData (jobName, jobArea, salary, des) VALUES (#{jobName},#{area},#{salary},#{des})")
+    @Insert("insert into jobData (jobName, jobArea, salary, des) VALUES (#{jobName},#{area},#{salary},#{des},now())")
     int insertData(@Param("jobName") String jobName, @Param("area") String area, @Param("salary") String salary, @Param("des") String des);
 
 
