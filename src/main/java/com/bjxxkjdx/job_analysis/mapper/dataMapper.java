@@ -21,6 +21,10 @@ public interface dataMapper {
     @Select("select name, sum(value)value from dataStruct group by name;")
     List<allMapReturn> getGroupMapData();
 
+    @Select("select name, sum(value)value from dataStruct where pushDate > date ('${bda}') and pushDate < date ('${eda}')group by name;")
+    List<allMapReturn> getGroupMaByDate(@Param("bda") String bda,@Param("eda") String eda);
+
+
     @Select("SELECT * FROM jobData WHERE jobName like %#{keyword}%;")
     List<jobsData> getGroupJobData(@Param("keyword") String keyword);
 
@@ -33,11 +37,11 @@ public interface dataMapper {
     @Update("update dataStruct set value = #{value} where jobName = #{jobName} and name = #{name}")
     int updateDataStruct(@Param("jobName") String jobName, @Param("name") String name, @Param("value") String value);
 
-    @Insert("insert into dataStruct (jobName, name, value) VALUES (#{jobName},#{name},#{value})")
+    @Insert("insert into dataStruct (jobName, name, value,pushDate) VALUES (#{jobName},#{name},#{value},now())")
     int insertDataStruct(@Param("jobName") String jobName, @Param("name") String name, @Param("value") String value);
 
 
-    @Insert("insert into jobData (jobName, jobArea, salary, des) VALUES (#{jobName},#{area},#{salary},#{des},now())")
+    @Insert("insert into jobData (jobName, jobArea, salary, des,pushData) VALUES (#{jobName},#{area},#{salary},#{des},now())")
     int insertData(@Param("jobName") String jobName, @Param("area") String area, @Param("salary") String salary, @Param("des") String des);
 
 

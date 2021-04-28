@@ -39,6 +39,13 @@ public class dataController {
         return dataMapper.getGroupMapData();
     }
 
+
+    @GetMapping(value = "/allGroupDataByDate")
+    public List<allMapReturn> getGroupMapByDate(@RequestParam(value = "bda") String bda,@RequestParam(value = "eda") String eda) {
+        return dataMapper.getGroupMaByDate(bda,eda);
+    }
+
+
     @PostMapping(value = "/upload")
     @ResponseBody
     public String uploadExcel(@RequestParam(value = "file") MultipartFile file) throws Exception {
@@ -89,14 +96,16 @@ public class dataController {
 
         for (dataReturn dataReturn : res) {
 //            if (dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName())!=null)
-            List<Integer> values = dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName());
-            if (values.size() > 0) {
-                dataMapper.deleteData(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(values.get(0)));
-                dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue() + values.get(0)));
-//                System.out.println(dataMapper.updateDataStruct(dataReturn.getJobName(),dataReturn.getName(),String.valueOf(dataReturn.getValue())));
-            } else {
-                dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue()));
-            }
+//            List<Integer> values = dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName());
+//            if (values.size() > 0) {
+////                dataMapper.deleteData(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(values.get(0)));
+//                dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue() + values.get(0)));
+////                System.out.println(dataMapper.updateDataStruct(dataReturn.getJobName(),dataReturn.getName(),String.valueOf(dataReturn.getValue())));
+//            } else {
+//            }
+
+            dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue()));
+
 
         }
 

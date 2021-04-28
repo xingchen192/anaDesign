@@ -79,16 +79,14 @@ public class utilsGetWordCloudData {
                 System.out.println(data.getJobName() + "{\'name\':\"" + temp + "\"" + ", " + "\"value\":" + Collections.frequency(areas, temp) + "},");
             }
 
-//            dataReturn dataReturn = new dataReturn();
-//
-//            dataReturn.setJobName(jobname);
-//
-//            String area = temp.getJobArea();
-//            if (area.contains("-"))
-//                area = area.split("-")[0];
-//            dataReturn.setName(area);
-//
-//            dataReturn.setName();
+        }
+        for (int i = 0;i < dataReturnList.size()-1;i++){
+            for (int j = 0;j < dataReturnList.size();j++){
+                if (dataReturnList.get(i).getJobName().equals(dataReturnList.get(j).getJobName())){
+                    dataReturnList.get(i).setValue(Math.max(dataReturnList.get(i).getValue(),dataReturnList.get(j).getValue()));
+                    dataReturnList.remove(j);
+                }
+            }
         }
         return dataReturnList;
     }
