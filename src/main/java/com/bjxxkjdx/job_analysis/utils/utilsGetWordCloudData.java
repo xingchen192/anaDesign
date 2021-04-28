@@ -80,14 +80,6 @@ public class utilsGetWordCloudData {
             }
 
         }
-        for (int i = 0;i < dataReturnList.size()-1;i++){
-            for (int j = 0;j < dataReturnList.size();j++){
-                if (dataReturnList.get(i).getJobName().equals(dataReturnList.get(j).getJobName())){
-                    dataReturnList.get(i).setValue(Math.max(dataReturnList.get(i).getValue(),dataReturnList.get(j).getValue()));
-                    dataReturnList.remove(j);
-                }
-            }
-        }
         return dataReturnList;
     }
 

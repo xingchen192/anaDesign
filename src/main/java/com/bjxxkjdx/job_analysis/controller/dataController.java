@@ -41,8 +41,8 @@ public class dataController {
 
 
     @GetMapping(value = "/allGroupDataByDate")
-    public List<allMapReturn> getGroupMapByDate(@RequestParam(value = "bda") String bda,@RequestParam(value = "eda") String eda) {
-        return dataMapper.getGroupMaByDate(bda,eda);
+    public List<allMapReturn> getGroupMapByDate(@RequestParam(value = "bda") String bda, @RequestParam(value = "eda") String eda) {
+        return dataMapper.getGroupMaByDate(bda, eda);
     }
 
 
@@ -95,16 +95,17 @@ public class dataController {
         List<dataReturn> res = utilsGetWordCloudData.utilsGetDataStruct(jobsDataListRes);
 
         for (dataReturn dataReturn : res) {
-//            if (dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName())!=null)
-//            List<Integer> values = dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName());
-//            if (values.size() > 0) {
-////                dataMapper.deleteData(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(values.get(0)));
-//                dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue() + values.get(0)));
-////                System.out.println(dataMapper.updateDataStruct(dataReturn.getJobName(),dataReturn.getName(),String.valueOf(dataReturn.getValue())));
-//            } else {
-//            }
+            if (dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName()) != null) {
+                List<Integer> values = dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName());
+                if (values.size() > 0) {
+                    dataMapper.deleteData(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(values.get(0)));
+                    dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue() + values.get(0)));
+//                    System.out.println(dataMapper.updateDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue())));
+                } else {
+                    dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue()));
 
-            dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue()));
+                }
+            }
 
 
         }
