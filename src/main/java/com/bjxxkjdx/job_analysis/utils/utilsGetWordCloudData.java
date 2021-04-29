@@ -83,6 +83,51 @@ public class utilsGetWordCloudData {
         return dataReturnList;
     }
 
+    public static List<dataReturn> utilsGetDataStruct1(List<jobsData> lists) {
+        List<dataReturn> dataReturnList = new ArrayList<>();
+//        List<String> areas = new ArrayList<>();
+        List<jobsData> strings=lists;
+        for (int i = 0;i < strings.size()-1;i++) {
+            dataReturn dataReturn = new dataReturn(strings.get(i).getJobName(),strings.get(i).getJobArea(),1);
+            for (int j= i+1;j<strings.size();j++){
+                if (strings.get(j).getJobName().equals(dataReturn.getJobName())&&strings.get(j).getJobArea().equals(dataReturn.getName())){
+                    dataReturn.setValue(dataReturn.getValue()+1);
+                    dataReturnList.add(dataReturn);
+                    strings.remove(j);
+//                    j--;
+                }
+                for (jobsData jobsData : strings){
+                    System.out.println(jobsData.getJobName());
+                }
+            }
+//            String area = data.getJobArea();
+//            if (area.contains("-"))
+//                area = area.split("-")[0];
+//            areas.add(area);
+//
+//            Set<String> uniqueSet = new HashSet(areas);
+////            List<allMapReturn> allMapReturns = new ArrayList<>();
+//            for (String temp : uniqueSet) {
+//                dataReturn dataReturn = new dataReturn(data.getJobName(), temp, Collections.frequency(areas, temp));
+//                dataReturnList.add(dataReturn);
+//                System.out.println(data.getJobName() + "{\'name\':\"" + temp + "\"" + ", " + "\"value\":" + Collections.frequency(areas, temp) + "},");
+//            }
+
+
+
+
+        }
+        dataReturnList.add(new dataReturn(strings.get(strings.size()-1).getJobName(),strings.get(strings.size()-1).getJobArea(),1));
+
+
+        for (dataReturn dataReturn:dataReturnList){
+            System.out.println(dataReturn.getJobName());
+            System.out.println(dataReturn.getName());
+            System.out.println(dataReturn.getValue());
+        }
+        return dataReturnList;
+    }
+
 
     public static List<allMapReturn> utilsGetWordCloudDatas(List<String> lists, int type) {
         List<String> results = new ArrayList();

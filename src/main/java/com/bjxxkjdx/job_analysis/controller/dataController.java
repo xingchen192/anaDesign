@@ -92,23 +92,39 @@ public class dataController {
 //        }
 
         List<jobsData> jobsDataListRes = utilsGetWordCloudData.utilsHandle(jobsDataList, nameLists);
-        List<dataReturn> res = utilsGetWordCloudData.utilsGetDataStruct(jobsDataListRes);
+        List<dataReturn> res = utilsGetWordCloudData.utilsGetDataStruct1(jobsDataListRes);
 
         for (dataReturn dataReturn : res) {
-            if (dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName()) != null) {
-                List<Integer> values = dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName());
-                if (values.size() > 0) {
-                    dataMapper.deleteData(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(values.get(0)));
-                    dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue() + values.get(0)));
-//                    System.out.println(dataMapper.updateDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue())));
-                } else {
-                    dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue()));
+//            if (dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName()) != null) {
+//                List<Integer> values = dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName());
+//                if (values.size() > 0) {
+//                    dataMapper.deleteData(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(values.get(0)));
+//                    dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue() + values.get(0)));
+////                    System.out.println(dataMapper.updateDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue())));
+//                } else {
+//                    dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue()));
+//
+//                }
+//            }
 
-                }
-            }
-
+            dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue()));
 
         }
+//        for (dataReturn dataReturn : res) {
+//            if (dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName()) != null) {
+//                List<Integer> values = dataMapper.getValue(dataReturn.getJobName(), dataReturn.getName());
+//                if (values.size() > 0) {
+//                    dataMapper.deleteData(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(values.get(0)));
+//                    dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue() + values.get(0)));
+////                    System.out.println(dataMapper.updateDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue())));
+//                } else {
+//                    dataMapper.insertDataStruct(dataReturn.getJobName(), dataReturn.getName(), String.valueOf(dataReturn.getValue()));
+//
+//                }
+//            }
+//
+//
+//        }
 
         return "上传成功";
     }
